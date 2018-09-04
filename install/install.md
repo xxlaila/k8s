@@ -1,16 +1,16 @@
-```
-环境：一个master节点，四个node节点
-master节点ip
+# 环境：一个master节点，四个node节点
+## master节点ip
   - 172.21.16.244
-node节点ip：
+## node节点ip：
   - 172.21.16.240
   - 172.21.16.231
   - 172.21.16.202
   - 172.21.16.55
 
-### 以下是每一个节点上均进行操作
+# 以下是每一个节点上均进行操作
 
-1、服务器添加阿里云yum源
+## 1、服务器添加阿里云yum源
+```
   # cat <<EOF > /etc/yum.repos.d/kubernetes.repo
   [kubernetes]
   name=Kubernetes
@@ -21,22 +21,24 @@ node节点ip：
   gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
     http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
   EOF
-
-2、重新建立yum缓存
-  # yum -y install epel-release &&yum clean all &&yum makecache
+```
+## 2、重新建立yum缓存
+```  # yum -y install epel-release &&yum clean all &&yum makecache
   # 记得同步系统的时间
-
-3、关闭swap
+```
+## 3、关闭swap
+```
   # sudo swapoff -a
-
-4、配置转发请求
+```
+## 4、配置转发请求
+```
   # cat <<EOF > /etc/sysctl.d/k8s.conf
   net.bridge.bridge-nf-call-ip6tables = 1
   net.bridge.bridge-nf-call-iptables = 1
   vm.swappiness=0
   EOF
   # sysctl --system
-
+```
 5、安装docker
   # yum -y install docker
   # systemctl enable docker && systemctl start docker
