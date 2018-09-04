@@ -70,13 +70,17 @@
 ## 8、初始化相关镜像
 ```
   # kubeadm init --kubernetes-version=v1.11.0 --pod-network-cidr=10.244.0.0/16
-  # 记下这句话，后面node节点加入需要
+```
+  - 记下这句话，后面node节点加入需要
+```
   # kubeadm join 172.21.16.244:6443 --token bttbal.356uhebshtqzor6x --discovery-token-ca-cert-hash sha256:0a48f67994da476b646ab8fc15b99d5dd67c3f9bce02f693a927e9bc590976e5
 ```
 ## 9、配置kubectl认证信息
 ```
   # export KUBECONFIG=/etc/kubernetes/admin.conf
-  # 永久有效
+```
+  - 永久有效
+```
   # echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /etc/profile
 ```
 ## 10、安装flannel网络
