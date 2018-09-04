@@ -287,7 +287,9 @@ subjects:
 ```
 # kubectl -f ./dashboard-admin.yaml create
 ```
-12、访问master节点的
+## 12、访问master节点的
+```
 http://172.21.16.244:30090/
-### 后面所有的节点加30090都可以反问dashboard页面  
+```
+  -  后面所有的节点加30090都可以反问dashboard页面  
 
