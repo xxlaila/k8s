@@ -39,15 +39,18 @@
   EOF
   # sysctl --system
 ```
-5、安装docker
+## 5、安装docker
+```
   # yum -y install docker
   # systemctl enable docker && systemctl start docker
-
-6、安装k8s 需要的插件
+```
+## 6、安装k8s 需要的插件
+```
   # yum -y install kubelet kubeadm kubectl kubernetes-cni
   # systemctl enable kubelet && systemctl start kubelet
-
-7、新建一个shell 拉取镜像到本地
+```
+## 7、新建一个shell 拉取镜像到本地
+```
   #!/bin/bash
   images=(kube-proxy-amd64:v1.11.0 kube-scheduler-amd64:v1.11.0 kube-controller-manager-amd64:v1.11.0 kube-apiserver-amd64:v1.11.0
   etcd-amd64:3.2.18 coredns:1.1.3 pause-amd64:3.1 kubernetes-dashboard-amd64:v1.8.3 k8s-dns-sidecar-amd64:1.14.9 k8s-dns-kube-dns-amd64:1.14.9
@@ -61,20 +64,23 @@
   docker pull kubernetes/heapster
   docker tag docker.io/kubernetes/heapster registry.cn-shenzhen.aliyuncs.com/intbee/heapster-amd64:v1.4.2
   docker rmi docker.io/kubernetes/heapster
+```
+# 以下操作是在k8s的master进行操作
 
-### 以下操作是在k8s的master进行操作
-
-8、初始化相关镜像
+## 8、初始化相关镜像
+```
   # kubeadm init --kubernetes-version=v1.11.0 --pod-network-cidr=10.244.0.0/16
   # 记下这句话，后面node节点加入需要
   # kubeadm join 172.21.16.244:6443 --token bttbal.356uhebshtqzor6x --discovery-token-ca-cert-hash sha256:0a48f67994da476b646ab8fc15b99d5dd67c3f9bce02f693a927e9bc590976e5
-
-9、配置kubectl认证信息
+```
+## 9、配置kubectl认证信息
+```
   # export KUBECONFIG=/etc/kubernetes/admin.conf
   # 永久有效
   # echo "export KUBECONFIG=/etc/kubernetes/admin.conf" >> /etc/profile
-
-10、安装flannel网络
+```
+## 10、安装flannel网络
+```
   # mkdir -p /etc/cni/net.d/
   # cat <<EOF> /etc/cni/net.d/10-flannel.conf
   {
@@ -93,7 +99,9 @@
   FLANNEL_MTU=1450
   FLANNEL_IPMASQ=true
   EOF
+```
 ## 建立flannel.yml文件
+```
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -235,13 +243,15 @@ spec:
   # kubectl create -f ./flannel.yml
   ## 查看
   # kubectl get nodes
-
-### 以下是每个node节点执行
-  # kubeadm join 172.21.16.244:6443 --token bttbal.356uhebshtqzor6x --discovery-token-ca-cert-hash sha256:0a48f67994da476b646ab8fc15b99d5dd67c3f9bce02f693a927e9bc590976e5
+``
+# 以下是每个node节点执行
+``` 
+ # kubeadm join 172.21.16.244:6443 --token bttbal.356uhebshtqzor6x --discovery-token-ca-cert-hash sha256:0a48f67994da476b646ab8fc15b99d5dd67c3f9bce02f693a927e9bc590976e5
   ## 查看
   # kubectl get nodes
-
-11、Dashboard的配置
+```
+## 11、Dashboard的配置
+```
   # 下载Dashboard的yaml文件
   # git clone https://github.com/gh-Devin/kubernetes-dashboard.git
   # kubernetes-dashboard
@@ -262,12 +272,12 @@ subjects:
 - kind: ServiceAccount
   name: kubernetes-dashboard
   namespace: kube-system
-
-## 启动容器
+```
+### 启动容器
+```
 # kubectl -f ./dashboard-admin.yaml create
-
+```
 12、访问master节点的
 http://172.21.16.244:30090/
-## 后面所有的节点加30090都可以反问dashboard页面  
+### 后面所有的节点加30090都可以反问dashboard页面  
 
-```
