@@ -244,18 +244,20 @@ spec:
           configMap:
             name: kube-flannel-cfg
 ```
-  ## 执行
+  - 执行
 ```
   # kubectl create -f ./flannel.yml
 ```
-  ## 查看
+  - 查看
 ```
   # kubectl get nodes
 ```
 # 以下是每个node节点执行 
 ```
  # kubeadm join 172.21.16.244:6443 --token bttbal.356uhebshtqzor6x --discovery-token-ca-cert-hash sha256:0a48f67994da476b646ab8fc15b99d5dd67c3f9bce02f693a927e9bc590976e5
-  ## 查看
+```
+  - 查看
+```
   # kubectl get nodes
 ```
 ## 11、Dashboard的配置
