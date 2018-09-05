@@ -23,9 +23,10 @@
   EOF
 ```
 ## 2、重新建立yum缓存
-```  # yum -y install epel-release &&yum clean all &&yum makecache
-  # 记得同步系统的时间
 ```
+  # yum -y install epel-release &&yum clean all &&yum makecache
+```
+  - 记得同步系统的时间
 ## 3、关闭swap
 ```
   # sudo swapoff -a
