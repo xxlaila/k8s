@@ -257,12 +257,14 @@ spec:
   # kubectl get nodes
 ```
 ## 11、Dashboard的配置
+  - 下载Dashboard的yaml文件
 ```
-  # 下载Dashboard的yaml文件
   # git clone https://github.com/gh-Devin/kubernetes-dashboard.git
   # kubernetes-dashboard
   # kubectl  -n kube-system create -f .
-  ## 新建一个dashboard-admin.yml文件
+```
+  - 新建一个dashboard-admin.yml文件
+```
   # vim dashboard-admin.yaml
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
