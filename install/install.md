@@ -53,18 +53,13 @@
 ## 7、新建一个shell 拉取镜像到本地
 ```
   #!/bin/bash
-  images=(kube-proxy-amd64:v1.11.0 kube-scheduler-amd64:v1.11.0 kube-controller-manager-amd64:v1.11.0 kube-apiserver-amd64:v1.11.0
-  etcd-amd64:3.2.18 coredns:1.1.3 pause-amd64:3.1 kubernetes-dashboard-amd64:v1.8.3 k8s-dns-sidecar-amd64:1.14.9 k8s-dns-kube-dns-amd64:1.14.9
-  k8s-dns-dnsmasq-nanny-amd64:1.14.9 )
+  images=(kube-proxy kube-scheduler kube-controller kube-apiserver etcd coredns pause kube-dashboard kube-dashboard-init k8s-dns-sidecar k8s-dns-kube-dns k8s-dns-dnsmasq-nanny heapster)
   for imageName in ${images[@]} ; do
-  docker pull keveon/$imageName
-  docker tag keveon/$imageName k8s.gcr.io/$imageName
-  docker rmi keveon/$imageName
+  docker pull xxlaila/$imageName
+  docker tag xxlaila/$imageName k8s.gcr.io/$imageName
+  docker rmi xxlaila/$imageName
   done
-  docker tag da86e6ba6ca1 k8s.gcr.io/pause:3.1
-  docker pull kubernetes/heapster
-  docker tag docker.io/kubernetes/heapster registry.cn-shenzhen.aliyuncs.com/intbee/heapster-amd64:v1.4.2
-  docker rmi docker.io/kubernetes/heapster
+  - docker tag da86e6ba6ca1 k8s.gcr.io/pause:3.1
 ```
 # 以下操作是在k8s的master进行操作
 
