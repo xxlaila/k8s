@@ -53,13 +53,13 @@
 ## 7、新建一个shell 拉取镜像到本地
 ```
   #!/bin/bash
-  images=(kube-proxy kube-scheduler kube-controller kube-apiserver etcd coredns pause kube-dashboard kube-dashboard-init k8s-dns-sidecar k8s-dns-kube-dns k8s-dns-dnsmasq-nanny heapster)
+  images=(kube-proxy-amd64 kube-scheduler-amd64 kube-controller-manager-amd64 kube-apiserver-amd64 etcd coredns pause-amd64 kubernetes-dashboard-amd64 kubernetes-dashboard-init-amd64 k8s-dns-sidecar-amd64 k8s-dns-kube-dns-amd64 k8s-dns-dnsmasq-nanny-amd64 heapster-amd64)
   for imageName in ${images[@]} ; do
   docker pull xxlaila/$imageName
   docker tag xxlaila/$imageName k8s.gcr.io/$imageName
   docker rmi xxlaila/$imageName
   done
-  - docker tag da86e6ba6ca1 k8s.gcr.io/pause:3.1
+  - docker tag cf80e75b1030 k8s.gcr.io/pause:3.1
 ```
 # 以下操作是在k8s的master进行操作
 
@@ -259,27 +259,10 @@ spec:
 ## 11、Dashboard的配置
   - 下载Dashboard的yaml文件
 ```
-  # git clone https://github.com/gh-Devin/kubernetes-dashboard.git
-  # kubernetes-dashboard
+  # https://github.com/xxlaila/k8s.git
+  # cd kubernetes-dashboard
   # kubectl  -n kube-system create -f .
-```
-  - 新建一个dashboard-admin.yml文件
-```
-  # vim dashboard-admin.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: kubernetes-dashboard
-  labels:
-    k8s-app: kubernetes-dashboard
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: kubernetes-dashboard
-  namespace: kube-system
+
 ```
 ### 启动容器
 ```
