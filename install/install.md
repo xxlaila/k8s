@@ -50,9 +50,9 @@ EOF
   # yum -y install kubelet kubeadm kubectl kubernetes-cni
   # systemctl enable kubelet && systemctl start kubelet
 ```
-## 修改为 kubelet 为Cgroup模式
+  - 修改为 kubelet 为Cgroup模式
 ```
-vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+# vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 Environment="KUBELET_CGROUP_ARGS=--cgroup-driver=systemd"
 systemctl daemon-reload && systemctl restart kubelet
 ```
@@ -239,13 +239,13 @@ args:
 ```
   - 重建dashboard
 
-## 通过利用http添加端口30001，然后利用tonken进行验证登陆
+  - 通过利用http添加端口30001，然后利用tonken进行验证登陆
 
-## 安装失败清理环境
+  - 安装失败清理环境
 ```
 # kubeadm reset
 ```
-## 查看加入集群token
+  - 查看加入集群token
 ```
 # kubeadm token list
 ```
