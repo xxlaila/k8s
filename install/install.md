@@ -116,7 +116,7 @@ FLANNEL_MTU=1450
 FLANNEL_IPMASQ=true
 EOF
 ```
-###11.1、建立flannel网络
+### 11.1、建立flannel网络(只需要在主节点操作即可)
 ```
 # kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 clusterrole.rbac.authorization.k8s.io/flannel created
@@ -170,6 +170,7 @@ kube-scheduler-k8s-zxc-test-3.kxl            1/1     Running   0          27m
 ```
   - 执行创建dashboard
 ```
+# cd kubernetes-yaml/kubernetes-dashboard
 # kubectl apply -f kubernetes-dashboard.yaml
 secret/kubernetes-dashboard-certs created
 serviceaccount/kubernetes-dashboard created
@@ -217,8 +218,8 @@ Events:              <none>
 ```
 ## 21、利用节点ip+30001 端口进行访问
 ```
-访问之前需要在master节点生成证书，把证书(kubecfg.p12)下载到本地，进行导入到浏览器，这里使用火狐浏览器，google浏览器导入不成功，生产证书
-之前记得第9步已操作
+访问之前需要在master节点生成证书，把证书(kubecfg.p12)下载到本地，进行导入到浏览器，这里使用火狐浏览器，google浏览器导入
+不成功，生产证书之前记得第9步已操作
 ```
   - 生产证书
 ```
